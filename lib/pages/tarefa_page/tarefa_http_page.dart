@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/model/tarefa_sqlite_model.dart';
 import 'package:trilhaapp/model/tarefas_back4app_model.dart';
 import 'package:trilhaapp/repositories/back4app/tarefas_back4app_repository.dart';
-import 'package:trilhaapp/repositories/sqlite/tarefa_sqlite_repository.dart';
 
 class TarefaHTTPPage extends StatefulWidget {
   const TarefaHTTPPage({super.key});

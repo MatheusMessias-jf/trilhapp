@@ -48,6 +48,7 @@ class _NumerosAleatoriosHivePageState extends State<NumerosAleatoriosHivePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
+                  // ignore: unnecessary_null_comparison
                   numeroGerado == null
                       ? "Nenhum número gerado"
                       : numeroGerado.toString(),

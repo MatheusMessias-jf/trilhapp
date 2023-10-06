@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:trilhaapp/model/tarefas_back4app_model.dart';
 import 'package:trilhaapp/repositories/back4app/back4app_custom_dio.dart';
 
