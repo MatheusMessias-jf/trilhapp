@@ -5,7 +5,6 @@ import 'package:trilhaapp/pages/configuracoes/configuracoes_hive_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/posts_page.dart';
 import 'package:trilhaapp/pages/tarefa_page/tarefa_http_page.dart';
-import 'package:trilhaapp/repositories/back4app/tarefas_back4app_repository.dart';
 
 import '../../pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import '../../pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
