@@ -44,8 +44,14 @@ dependencies:
   dio: ^5.3.3
   crypto: ^3.0.3
   flutter_dotenv: ^5.1.0
+  font_awesome_flutter: ^10.5.0
+  percent_indicator: ^4.2.3
+  auto_size_text: ^3.0.0
+  animated_text_kit: ^4.2.2
+  convex_bottom_bar: ^3.2.0
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.13.1"
   flutter_test:
     sdk: flutter
 
@@ -104,3 +110,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_launcher_icons:
+  android: "launcher_icon"   
+  ios: true
+  image_path: "assets/icon/icon.png"
+  remove_alpha_ios: true

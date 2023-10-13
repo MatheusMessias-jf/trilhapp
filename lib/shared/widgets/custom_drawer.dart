@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trilhaapp/pages/auto_size_text/auto_size_text_page.dart';
+import 'package:trilhaapp/pages/botton_bar_page.dart';
 import 'package:trilhaapp/pages/characters/characters_page.dart';
 import 'package:trilhaapp/pages/configuracoes/configuracoes_hive_page.dart';
+import 'package:trilhaapp/pages/percent_indicator_page.dart';
 
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/posts_page.dart';
@@ -84,6 +88,27 @@ class CustomDrawer extends StatelessWidget {
                   width: double.infinity,
                   child: const Row(
                     children: [
+                      FaIcon(FontAwesomeIcons.percent),
+                      SizedBox(width: 5),
+                      Text("Percent Indicator"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PercentIndicatorPage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
                       Icon(Icons.build_circle),
                       SizedBox(
                         width: 5,
@@ -97,6 +122,50 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (bc) => const ConfiguracoesHivePage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      Icon(Icons.text_fields),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Auto Sized Text"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (bc) => const AutoSizeTextPage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      Icon(Icons.vertical_align_bottom_rounded),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Botton Bar Page"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (bc) => const BottonBarPage()));
               }),
           const Divider(),
           const SizedBox(height: 10),
@@ -178,7 +247,10 @@ class CustomDrawer extends StatelessWidget {
                   width: double.infinity,
                   child: const Row(
                     children: [
-                      Icon(Icons.post_add),
+                      FaIcon(
+                        FontAwesomeIcons.podcast,
+                        color: Colors.amber,
+                      ),
                       SizedBox(
                         width: 5,
                       ),
