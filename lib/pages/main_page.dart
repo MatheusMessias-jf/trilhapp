@@ -5,6 +5,7 @@ import 'package:trilhaapp/pages/list_view.dart';
 import 'package:trilhaapp/pages/list_view_horizontal.dart';
 import 'package:trilhaapp/pages/tarefa_page/tarefa_sqlite_page.dart';
 import 'package:trilhaapp/pages/consulta_cep.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../shared/widgets/custom_drawer.dart';
 
@@ -23,7 +24,7 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Meu app"),
+          title: const Text("APP_TITLE").tr(),
         ),
         drawer: const CustomDrawer(),
         body: Column(children: [

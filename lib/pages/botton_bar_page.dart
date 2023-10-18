@@ -1,5 +1,8 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:trilhaapp/pages/brasil_fields/brasil_fields_page.dart';
 
 class BottonBarPage extends StatefulWidget {
   const BottonBarPage({super.key});
@@ -26,9 +29,7 @@ class _BottonBarPageState extends State<BottonBarPage>
           title: const Text("Botton Bar Page"),
         ),
         body: TabBarView(controller: tabController, children: [
-          Container(
-            color: Colors.yellow,
-          ),
+          const BrasilFieldsPage(),
           Container(
             color: Colors.blue,
           ),
@@ -47,7 +48,7 @@ class _BottonBarPageState extends State<BottonBarPage>
           color: Colors.white,
           backgroundColor: Colors.deepPurple,
           items: const [
-            TabItem(icon: Icons.home, title: 'Home'),
+            TabItem(icon: Icons.home, title: 'Brasil'),
             TabItem(icon: Icons.map, title: 'Discovery'),
             TabItem(icon: Icons.add, title: 'Add'),
             TabItem(icon: Icons.message, title: 'Message'),

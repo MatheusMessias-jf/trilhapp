@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:trilhaapp/pages/auto_size_text/auto_size_text_page.dart';
 import 'package:trilhaapp/pages/botton_bar_page.dart';
 import 'package:trilhaapp/pages/characters/characters_page.dart';
@@ -12,6 +14,8 @@ import 'package:trilhaapp/pages/tarefa_page/tarefa_http_page.dart';
 
 import '../../pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import '../../pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
+
+import 'package:intl/date_symbol_data_local.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -330,9 +334,9 @@ class CustomDrawer extends StatelessWidget {
                         elevation: 10,
                         alignment: Alignment.centerLeft,
                         title: const Text(
-                          "Meu App",
+                          "APP_TITLE",
                           style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                        ).tr(),
                         content: const Wrap(
                           children: [
                             Text("Deseja realmente sair do aplicativo?")
@@ -356,6 +360,58 @@ class CustomDrawer extends StatelessWidget {
                         ],
                       );
                     });
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.home),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Intl"),
+                    ],
+                  )),
+              onTap: () {
+                initializeDateFormatting('en_US');
+                var f = NumberFormat('#,###.0#', 'en_US');
+                var fBR = NumberFormat('#,###.0#', 'pt_BR');
+                print(f.format(12345.345));
+                print(fBR.format(12345.345));
+
+                var data = DateTime(2023, 10, 16);
+                print(DateFormat('EEEEE', 'en_US').format(data));
+                print(DateFormat('EEEEE', 'pt_BR').format(data));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.flag),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Trocar Idioma"),
+                    ],
+                  )),
+              onTap: () {
+                if (context.locale.toString() == "pt_BR") {
+                  context.setLocale(Locale('en', 'US'));
+                } else {
+                  context.setLocale(Locale('pt', 'BR'));
+                }
+                print(context.locale.toString());
+                Navigator.pop(context);
               }),
         ],
       ),
