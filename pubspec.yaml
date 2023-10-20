@@ -52,6 +52,13 @@ dependencies:
   brasil_fields: ^1.14.0
   intl: ^0.18.0
   easy_localization: ^3.0.1
+  battery_plus: ^4.1.0
+  url_launcher: ^6.1.14
+  share_plus: ^7.2.1
+  package_info_plus: ^4.2.0
+  device_info_plus: ^9.1.0
+  connectivity_plus: ^5.0.1
+  geolocator: ^10.0.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"

@@ -1,16 +1,27 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:trilhaapp/pages/auto_size_text/auto_size_text_page.dart';
+import 'package:trilhaapp/pages/battery/battery_page.dart';
 import 'package:trilhaapp/pages/botton_bar_page.dart';
 import 'package:trilhaapp/pages/characters/characters_page.dart';
 import 'package:trilhaapp/pages/configuracoes/configuracoes_hive_page.dart';
+import 'package:trilhaapp/pages/connectivity_plus/connectivity_plus_page.dart';
+import 'package:trilhaapp/pages/geolocator/geolocator_page.dart';
 import 'package:trilhaapp/pages/percent_indicator_page.dart';
 
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/posts_page.dart';
 import 'package:trilhaapp/pages/tarefa_page/tarefa_http_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../../pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import '../../pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
@@ -103,6 +114,220 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const PercentIndicatorPage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.internetExplorer,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(width: 5),
+                      Text("Abrir DIO"),
+                    ],
+                  )),
+              onTap: () async {
+                Navigator.pop(context);
+                await launchUrl(Uri.parse('https://dio.me'));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.appStore,
+                      ),
+                      SizedBox(width: 5),
+                      Text("Informações do pacote"),
+                    ],
+                  )),
+              onTap: () async {
+                Navigator.pop(context);
+
+                PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+                String appName = packageInfo.appName;
+                String packageName = packageInfo.packageName;
+                String version = packageInfo.version;
+                String buildNumber = packageInfo.buildNumber;
+
+                print(appName);
+                print(packageName);
+                print(version);
+                print(buildNumber);
+
+                print(Platform.operatingSystem);
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.mapLocationDot,
+                      ),
+                      SizedBox(width: 5),
+                      Text("Abrir Google Maps"),
+                    ],
+                  )),
+              onTap: () async {
+                await launchUrl(
+                    Uri.parse('http://maps.apple.com/?q=Mexican+Restaurant'));
+                Navigator.pop(context);
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.wifi,
+                      ),
+                      SizedBox(width: 5),
+                      Text("Conexão"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const ConnectivityPlusPage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.locationDot,
+                      ),
+                      SizedBox(width: 5),
+                      Text("GPS"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const GeolocatorPage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.robot,
+                      ),
+                      SizedBox(width: 5),
+                      Text("Informações do Dispositivo"),
+                    ],
+                  )),
+              onTap: () async {
+                DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
+                if (Platform.isAndroid) {
+                  AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+                  print('Running on ${androidInfo.model}'); // e.g. "Moto G (4)"
+                } else if (Platform.isIOS) {
+                  IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+                  print(
+                      'Running on ${iosInfo.utsname.machine}'); // e.g. "iPod7,1"
+                } else {
+                  WebBrowserInfo webBrowserInfo =
+                      await deviceInfo.webBrowserInfo;
+                  print(
+                      'Running on ${webBrowserInfo.userAgent}'); // e.g. "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0"
+                }
+
+                Navigator.pop(context);
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.folder,
+                      ),
+                      SizedBox(width: 5),
+                      Text("Path Provider"),
+                    ],
+                  )),
+              onTap: () async {
+                var directory = await path_provider.getTemporaryDirectory();
+                print(directory);
+                Navigator.pop(context);
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.batteryHalf),
+                      SizedBox(width: 5),
+                      Text("Indicador da Bateria"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BatteryPage()));
+              }),
+          const Divider(),
+          const SizedBox(height: 10),
+          InkWell(
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: double.infinity,
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.share),
+                      SizedBox(width: 5),
+                      Text("Compartilhar"),
+                    ],
+                  )),
+              onTap: () {
+                Share.share('Olhem esse site que encontrei! https://dio.me');
+                Navigator.pop(context);
               }),
           const Divider(),
           const SizedBox(height: 10),
